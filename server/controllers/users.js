@@ -1,0 +1,77 @@
+const {User} = require("../indexdatabase.js")
+const bcrypt = require ("bcrypt")
+const jwt = require ("jsonwebtoken")
+const isEmailValid= (email) => {
+ const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  return re.test(email);
+
+}
+
+const addUser = async (req, res)=>{
+    const { username, email, password, role  } = req.body
+    try {
+        if(isEmailValid(email)) {
+        const hashedPassword = await bcrypt.hash(password, 10)
+        const newuser= await User.create({
+            username,
+            email, 
+            password: hashedPassword,
+            role
+        })
+        const token = jwt.sign({ userId: newuser.id }, 'this is my secret key for our first senior project', {
+            expiresIn: 3600,
+            })
+
+        res.cookie('jwt', token, {httpOnly : true, maxAge: 3600*1000})
+        res.status(201).json({user: newuser.id})
+
+        }
+        
+        else {
+            res.send("Please enter a valid email")
+        }
+    }
+    catch (error) {
+        console.error(error)
+        res.status(500).send("error adding a user")
+    }
+}
+
+const loginUser = async (req,res) => {
+    const { email, password } = req.body
+
+    try {
+        
+        const user = await User.findOne({ where: { email } });
+        if (!user) {
+        return res.status(401).json({ error: 'Authentication failed' });
+        }
+        const passwordmatch = await bcrypt.compare(password, user.password);
+        if (!passwordmatch) {
+        return res.status(401).json({ error: 'Authentication failed' });
+        }
+        const token = jwt.sign({ userId: user.id, role: user.role }, 'this is my secret key for our first senior project', {
+        expiresIn: 3600,
+        })
+        res.cookie('jwt', token, {httpOnly : true, maxAge: 3600*1000})
+        res.status(200).json({ user });
+        } 
+      catch (error) {
+        res.status(500).json({ error: 'Login failed' });
+        }
+        }
+
+     const logoutUser = async (req,res) => {
+        res.cookie('jwt', '', {maxAge : 1 })
+        res.send("logout successfully")
+     }
+       
+
+
+
+
+module.exports= {
+    addUser,
+    loginUser,
+    logoutUser
+}
