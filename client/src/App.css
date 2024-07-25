@@ -82,21 +82,28 @@
 
 .home__row {
   display: flex;
-  gap: 100px;
-  /* margin-top: -70px; */
-  /* position: absolute; */
   align-items: center;
   justify-content: center;
   padding: 10px;
-  /* top: 50%;
-  left: 20%; */
   transform: translate(-30%, -30%);
   width: 200px;
-  height: 300px;
+  height: 350px;
   z-index: 1;
   background-color: white;
   border-radius: 20px;
-  margin-left: 200px;
+  margin-left: 140px;
+  margin-right: 70px;
+  overflow: hidden;
+}
+
+.home__row img {
+  display: block;
+  width: 100%;
+  transition: all 0.4s;
+}
+
+.home__row img:hover {
+  transform: scale(1.1);
 }
 
 .home__details {
@@ -107,7 +114,7 @@
   gap: 8px;
 }
 .home__img {
-  width: 10rem;
+  width: 6rem;
 }
 .add__item__cart {
   color: white;
@@ -243,4 +250,71 @@
   align-items: center;
   justify-content: center;
   transform: translate(0%, -140%);
+}
+.footer__img {
+  width: 50px;
+  filter: grayscale(100%);
+}
+.footer__container {
+  border-top: 1px solid #eee;
+  display: flex;
+  color: rgb(59, 57, 57);
+  align-items: flex-start;
+  justify-content: center;
+  gap: 50px;
+  padding: 25px;
+}
+.image__name__footer {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.social__media__footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 15%;
+  align-items: center;
+}
+
+.icon__footer {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.icon__copyright__footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+}
+.icon__copyright__footer > span {
+  text-align: center;
+}
+.contact__us__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 15%;
+}
+.account__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 15%;
+}
+.about__us__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 15%;
+}
+.resources__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 15%;
 }
