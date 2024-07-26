@@ -1,14 +1,31 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
-
+import { jwtDecode } from "jwt-decode";
 function NavBar() {
+  const [user, setUser] = useState({});
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      try {
+        const parsedUser = JSON.parse(storedUser);
+        if (parsedUser.token) {
+          const decodedToken = jwtDecode(parsedUser.token);
+          setUser({ ...parsedUser, ...decodedToken });
+        }
+      } catch (error) {
+        console.error("Error decoding token:", error);
+      }
+    }
+  }, []);
 
   const logout = () => {
     localStorage.removeItem("user");
+    setUser(null);
     navigate("/");
   };
 
@@ -30,8 +47,7 @@ function NavBar() {
         </div>
       </div>
       <div className="option">
-        {JSON.parse(localStorage.getItem("user")) &&
-          JSON.parse(localStorage.getItem("user")).user.role === "admin" && (
+        {user && user.role === "admin" && (
             <button
               className="admin__btn"
               onClick={() => {
@@ -41,8 +57,7 @@ function NavBar() {
               Admin Page
             </button>
           )}
-        {JSON.parse(localStorage.getItem("user")) &&
-        JSON.parse(localStorage.getItem("user")).user ? (
+        {user ? (
           <button className="sign__in__msg" onClick={logout}>
             Logout
           </button>
