@@ -22,8 +22,8 @@ const addUser = async (req, res)=>{
             expiresIn: 3600,
             })
 
-        res.cookie('jwt', token, {httpOnly : true, maxAge: 3600*1000})
-        res.status(201).json({user: newuser.id})
+       
+        res.status(201).json({token})
 
         }
         
@@ -53,19 +53,15 @@ const loginUser = async (req,res) => {
         const token = jwt.sign({ userId: user.id, role: user.role }, 'this is my secret key for our first senior project', {
         expiresIn: 3600,
         })
-        res.cookie('jwt', token, {httpOnly : true, maxAge: 3600*1000})
-        res.status(200).json({ user });
+       
+        res.status(200).json({ token });
         } 
       catch (error) {
         res.status(500).json({ error: 'Login failed' });
         }
         }
 
-     const logoutUser = async (req,res) => {
-        res.cookie('jwt', '', {maxAge : 1 })
-        res.send("logout successfully")
-     }
-       
+   
 
 
 
@@ -73,5 +69,5 @@ const loginUser = async (req,res) => {
 module.exports= {
     addUser,
     loginUser,
-    logoutUser
+   
 }

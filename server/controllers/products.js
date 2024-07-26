@@ -77,6 +77,17 @@ const updateProduct = async (req, res) => {
   }
 };
 
+const searchBycategory = async (req, res) => {
+    const {category} = req.body
+    try {
+        const products= await Product.findAll({ where : {category : category}})
+        res.json(products)
+    }
+    catch(error) {
+        console.error(error)
+        res.status(500).send("error fetching the products")
+    }
+}
 
 
 
@@ -86,6 +97,7 @@ module.exports = {
     addProduct,
     getOneProduct,
     deleteProduct,
-    updateProduct
+    updateProduct,
+    searchBycategory
 
 }

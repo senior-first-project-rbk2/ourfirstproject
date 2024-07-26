@@ -3,10 +3,12 @@ const productrouter=require("./routes/products.js")
 const usersrouter= require("./routes/users.js")
 const cartitemrouter = require("./routes/cartitem.js")
 const cookieParse = require ("cookie-parser")
+const cors= require("cors")
 const app = express();
 const PORT = 5000;
 
-app.use(express.json());
+app.use(express.json())
+app.use(cors())
 app.use(cookieParse())
 app.use("/products", productrouter)
 app.use("/users", usersrouter)
