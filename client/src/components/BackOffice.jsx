@@ -53,6 +53,7 @@ function BackOffice() {
                 <th>description</th>
                 <th>price</th>
                 <th>quantity</th>
+
                 <img
                   className="item__img"
                   src="https://www.scoop.com.tn/44780-home_default/console-sony-ps5-digital-edition-ea-sports-fc-24.jpg"
@@ -71,10 +72,12 @@ function BackOffice() {
                 <th>description</th>
                 <th>price</th>
                 <th>quantity</th>
-                <img
-                  className="item__img"
-                  src="https://www.scoop.com.tn/44780-home_default/console-sony-ps5-digital-edition-ea-sports-fc-24.jpg"
-                />
+                <th>
+                  <img
+                    className="item__img"
+                    src="https://www.scoop.com.tn/44780-home_default/console-sony-ps5-digital-edition-ea-sports-fc-24.jpg"
+                  />
+                </th>
                 <div className="delete__add__btn">
                   <button className="add__btn">Update!</button>
                   <button className="add__btn">Delete!</button>

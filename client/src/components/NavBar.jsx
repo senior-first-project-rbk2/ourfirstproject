@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +6,12 @@ import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 
 function NavBar() {
   const navigate = useNavigate();
+
+  const logout = () => {
+    localStorage.removeItem("user");
+    navigate("/");
+  };
+
   return (
     <div className="navbar__container">
       <img
@@ -24,22 +30,32 @@ function NavBar() {
         </div>
       </div>
       <div className="option">
-        <button
-          className="admin__btn"
-          onClick={() => {
-            navigate("/BackOffice");
-          }}
-        >
-          Admin Page
-        </button>
-        <button
-          className="sign__in__msg"
-          onClick={() => {
-            navigate("/login");
-          }}
-        >
-          Login/Register Now
-        </button>
+        {JSON.parse(localStorage.getItem("user")) &&
+          JSON.parse(localStorage.getItem("user")).user.role === "admin" && (
+            <button
+              className="admin__btn"
+              onClick={() => {
+                navigate("/BackOffice");
+              }}
+            >
+              Admin Page
+            </button>
+          )}
+        {JSON.parse(localStorage.getItem("user")) &&
+        JSON.parse(localStorage.getItem("user")).user ? (
+          <button className="sign__in__msg" onClick={logout}>
+            Logout
+          </button>
+        ) : (
+          <button
+            className="sign__in__msg"
+            onClick={() => {
+              navigate("/login");
+            }}
+          >
+            Login
+          </button>
+        )}
         <div className="cart">
           <FontAwesomeIcon
             className="shopping__cart__icon"
