@@ -6,6 +6,7 @@ import BackOffice from "./components/BackOffice.jsx";
 import Login from "./components/Login.jsx";
 import Cart from "./components/Cart.jsx";
 import Footer from "./components/Footer.jsx";
+import Register from "./components/Register.jsx";
 
 function App() {
   return (
@@ -18,9 +19,10 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/backOffice" element={<BackOffice />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </div>
-        <Footer />
+      <Footer />
     </div>
   );
 }

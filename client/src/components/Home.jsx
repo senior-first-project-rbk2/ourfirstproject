@@ -23,7 +23,7 @@ function Home() {
               <div className="home__details">
                 <img className="home__img" src={prod.imageUrl} />
                 <p>{prod.name}</p>
-                <p>{prod.price}</p>
+                <p>{prod.price}$</p>
                 <button className="home__btn">Add Item</button>
               </div>
             </div>

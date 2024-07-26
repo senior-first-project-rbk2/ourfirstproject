@@ -41,7 +41,9 @@ function Login() {
       <button className="login__btn" onClick={handleClick}>
         Login
       </button>
-      <button className="login__btn">register Now</button>
+      <button className="login__btn"   onClick={() => {
+          navigate("/register");
+        }}>register Now</button>
     </div>
   );
 }

@@ -189,8 +189,14 @@
 }
 .items {
   display: flex;
+  width: 300px;
   flex-direction: column;
-  gap: 20;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.product__description__backoffice {
+  font-size: 12px;
 }
 .delete__btn {
   background-color: #ff8225;
@@ -210,6 +216,7 @@
   align-items: center;
   justify-content: center;
 }
+
 .login__container {
   height: 300px;
   margin-top: 20px;
@@ -318,4 +325,20 @@
   flex-direction: column;
   gap: 20px;
   width: 15%;
+}
+
+.register__container {
+  height: 300px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-image: url("https://t3.ftcdn.net/jpg/02/48/13/84/360_F_248138476_vRdrN0FuKMMOPViRojcK41IqCiFn4J1q.jpg");
+  display: flex;
+  background-position: top;
+  background-size: cover;
+  background-position: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
 }
