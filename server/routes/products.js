@@ -1,5 +1,6 @@
 const {getAllProducts, addProduct, getOneProduct, deleteProduct, updateProduct, searchBycategory
 } =require ("../controllers/products.js")
+
 const express= require("express")
 
 const productrouter= express.Router()
