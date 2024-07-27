@@ -91,6 +91,7 @@ const updateCartitem = async (req, res) => {
   
     
       const response = cartItems.map(cartItem => ({
+        id: cartItem.id,
         productId: cartItem.productId,
         quantity: cartItem.quantity,
         product: cartItem.product, 
