@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { getAllProduct } from "../services/productService";
+import ProductDetails from "./ProductDetails.jsx";
 function Home() {
   const [products, setProducts] = useState([]);
+  const [showProductDetails, setShowProductDetails] = useState(false);
+  const [selectedProd, setSelectedProd] = useState("");
+ 
+
   useEffect(() => {
     getAllProduct()
       .then((res) => {
@@ -24,12 +29,27 @@ function Home() {
                 <img className="home__img" src={prod.imageUrl} />
                 <p>{prod.name}</p>
                 <p>{prod.price}$</p>
-                <button className="home__btn">Add Item</button>
+                <button
+                  onClick={() => {
+                    setSelectedProd(prod);
+                    setShowProductDetails(true);
+                  }}
+                  className="home__btn"
+                >
+                  Product Details
+                </button>
               </div>
             </div>
           ))}
         </div>
       </div>
+      <ProductDetails
+        show={showProductDetails}
+        handleClose={() => {
+          setShowProductDetails(false)}}
+        product={selectedProd}
+
+      />
     </div>
   );
 }

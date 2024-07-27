@@ -245,6 +245,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-bottom: 100px;
   gap: 20px;
 }
 .shopping__cart_img {
@@ -341,4 +342,95 @@
   align-items: center;
   gap: 10px;
   font-size: 12px;
+}
+
+.update__container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+.update__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  width: 80%;
+  height: 80%;
+  gap: 20px;
+  position: relative;
+  padding: 20px;
+  z-index: 2000;
+}
+.close-button {
+  background-color: black;
+  color: #ff8225;
+  font-size: 16px;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  cursor: pointer;
+  padding: 10px;
+  border: none;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse; /* Ensure borders don't double up */
+}
+
+th,
+td {
+  border: 1px solid black; /* Border for all cells */
+  padding: 8px; /* Padding for better spacing */
+  text-align: left; /* Align text to the left */
+}
+
+thead th {
+  background-color: #f2f2f2; /* Background color for header */
+}
+
+th,
+td {
+  width: 14.28%; /* 100% divided by 7 columns */
+}
+
+.item__img {
+  width: 100px; /* Fixed width for images */
+  height: 100px; /* Fixed height for images */
+}
+
+.item__details {
+  margin: 50px;
+}
+.details__img {
+  width: 200px;
+}
+.details__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 20px;
+}
+.details__details__products {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }

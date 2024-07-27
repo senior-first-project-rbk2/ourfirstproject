@@ -1,30 +1,12 @@
-// const handleChangeName = (e) => {
-//   setName(e.target.value);
-// };
-// const handleChangeDescription = (e) => {
-//   setDescription(e.target.value);
-// };
-// const handleChangePrice = (e) => {
-//   setPrice(e.target.value);
-// };
-// const handleChangeQuantity = (e) => {
-//   setQuantity(e.target.value);
-// };
-// const handleChangeImageUrl = (e) => {
-//   setImageUrl(e.target.value);
-// };
-// const handleChangeCategory = (e) => {
-//   setCategory(e.target.value);
-// };
-
-
-
-
-
 import React, { useEffect, useState } from "react";
 import { addProducts } from "../services/productService";
 import { useNavigate } from "react-router-dom";
-import { getAllProduct } from "../services/productService";
+import {
+  getAllProduct,
+  deleteProduct,
+  updateProduct,
+} from "../services/productService";
+import Update from "./Update.jsx";
 
 function BackOffice() {
   const navigate = useNavigate();
@@ -35,6 +17,8 @@ function BackOffice() {
   const [quantity, setQuantity] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [category, setCategory] = useState("");
+  const [showUpdate, setShowUpdate] = useState(false);
+  const [currentProduct, setCurrentProduct] = useState(null);
 
   useEffect(() => {
     getAllProduct()
@@ -65,6 +49,14 @@ function BackOffice() {
     setCategory(e.target.value);
   };
 
+  const handleClickDelete = (id) => {
+    deleteProduct(id)
+      .then((res) => {
+        console.log("item deleted");
+      })
+      .catch((err) => alert("Incorrect email or password", err));
+  };
+
   const handleUpload = () => {
     window.cloudinary.openUploadWidget(
       {
@@ -87,11 +79,14 @@ function BackOffice() {
   const handleClick = () => {
     addProducts(name, description, imageUrl, price, quantity, category)
       .then((res) => {
-        const jsonData = JSON.stringify(res);
-        localStorage.setItem("product", jsonData);
         navigate("/");
       })
       .catch((err) => alert("the product is not added", err));
+  };
+  const handleUpdateClick = (product) => {
+    console.log(product);
+    setCurrentProduct(product);
+    setShowUpdate(true);
   };
 
   return (
@@ -130,27 +125,60 @@ function BackOffice() {
         <div className="item__details">
           <table>
             <thead>
-              {adminProducts.map((product) => (
-                <tr className="items">
-                  <th>{product.name}</th>
-                  <th className="product__description__backoffice">
+              <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Category</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {adminProducts.map((product, index) => (
+                <tr  key={index}>
+                  <td>
+                    <img
+                      className="item__img"
+                      src={product.imageUrl}
+                      alt={product.name}
+                    />
+                  </td>
+                  <td>{product.name}</td>
+                  <td className="product__description__backoffice">
                     {product.description}
-                  </th>
-                  <th>{product.price}</th>
-                  <th>{product.Quantity}</th>
-                  <th>{product.category}</th>
-
-                  <img className="item__img" src={product.imageUrl} />
-                  <div className="delete__add__btn">
-                    <button className="add__btn">Update!</button>
-                    <button className="add__btn">Delete!</button>
-                  </div>
+                  </td>
+                  <td>{product.price}</td>
+                  <td>{product.quantity}</td>
+                  <td>{product.category}</td>
+                  <td>
+                    <div className="delete__add__btn">
+                      <button
+                        className="add__btn"
+                        onClick={() => handleUpdateClick(product)}
+                      >
+                        Update!
+                      </button>
+                      <button
+                        className="add__btn"
+                        onClick={() => handleClickDelete(product.id)}
+                      >
+                        Delete!
+                      </button>
+                    </div>
+                  </td>
                 </tr>
               ))}
-            </thead>
+            </tbody>
           </table>
         </div>
       </main>
+      <Update
+        show={showUpdate}
+        handleClose={() => setShowUpdate(false)}
+        product={currentProduct}
+      />
     </div>
   );
 }

@@ -50,3 +50,15 @@ export const deleteProduct = async (id) => {
       throw err;
     });
 };
+
+export const updateProduct = async (id, price, quantity) => {
+  return axios
+    .put(`http://localhost:5000/products/update/${id}`, { price, quantity })
+    .then((res) => {
+      return res.data;
+    })
+    .catch((err) => {
+      console.log(err);
+      throw err;
+    });
+};

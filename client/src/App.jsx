@@ -8,6 +8,7 @@ import Cart from "./components/Cart.jsx";
 import Footer from "./components/Footer.jsx";
 import Register from "./components/Register.jsx";
 
+
 function App() {
   return (
     <div className="app">
@@ -15,11 +16,11 @@ function App() {
       <div>
         <Routes>
           <Route path="/" element={<Home />} />
-
           <Route path="/login" element={<Login />} />
           <Route path="/backOffice" element={<BackOffice />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/register" element={<Register />} />
+        
         </Routes>
       </div>
       <Footer />
