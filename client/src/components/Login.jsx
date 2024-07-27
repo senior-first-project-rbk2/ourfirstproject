@@ -15,7 +15,7 @@ function Login() {
   };
   const handleClick = () => {
     login(email, password)
-      .then((res) => {  
+      .then((res) => {
         navigate("/");
         const jsonData = JSON.stringify(res);
         localStorage.setItem("user", jsonData);
@@ -41,9 +41,14 @@ function Login() {
       <button className="login__btn" onClick={handleClick}>
         Login
       </button>
-      <button className="login__btn"   onClick={() => {
+      <button
+        className="login__btn"
+        onClick={() => {
           navigate("/register");
-        }}>register Now</button>
+        }}
+      >
+        register Now
+      </button>
     </div>
   );
 }
