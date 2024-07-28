@@ -166,6 +166,7 @@ function BackOffice() {
                       >
                         Delete!
                       </button>
+                     
                     </div>
                   </td>
                 </tr>
