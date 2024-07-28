@@ -5,7 +5,6 @@ function Home() {
   const [products, setProducts] = useState([]);
   const [showProductDetails, setShowProductDetails] = useState(false);
   const [selectedProd, setSelectedProd] = useState("");
- 
 
   useEffect(() => {
     getAllProduct()
@@ -38,6 +37,7 @@ function Home() {
                 >
                   Product Details
                 </button>
+                <button className=" add__item">add to Cart</button>
               </div>
             </div>
           ))}
@@ -46,9 +46,9 @@ function Home() {
       <ProductDetails
         show={showProductDetails}
         handleClose={() => {
-          setShowProductDetails(false)}}
+          setShowProductDetails(false);
+        }}
         product={selectedProd}
-
       />
     </div>
   );

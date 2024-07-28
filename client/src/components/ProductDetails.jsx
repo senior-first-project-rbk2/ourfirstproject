@@ -2,9 +2,6 @@ import React, { useEffect, useState } from "react";
 import { updateProduct } from "../services/productService";
 
 function ProductDetails({ show, product, handleClose }) {
-  const [showUpdate, setShowUpdate] = useState(false);
-  console.log(product);
-
   if (!show) {
     return null;
   }
