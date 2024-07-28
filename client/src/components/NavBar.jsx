@@ -9,20 +9,16 @@ function NavBar() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
+    const storedToken = localStorage.getItem("user");
+    if (storedToken) {
       try {
-        const parsedUser = JSON.parse(storedUser);
-        if (parsedUser.token) {
-          const decodedToken = jwtDecode(parsedUser.token);
-          setUser({ ...parsedUser, ...decodedToken });
-        }
+        const decodedToken = jwtDecode(storedToken);
+        setUser(decodedToken);
       } catch (error) {
         console.error("Error decoding token:", error);
       }
     }
   }, []);
-
   const logout = () => {
     localStorage.removeItem("user");
     setUser(null);

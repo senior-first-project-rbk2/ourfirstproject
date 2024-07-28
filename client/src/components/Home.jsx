@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { getAllProduct } from "../services/productService";
 import ProductDetails from "./ProductDetails.jsx";
+import {jwtDecode}from "jwt-decode";
+import axios from "axios";
 function Home() {
   const [products, setProducts] = useState([]);
   const [showProductDetails, setShowProductDetails] = useState(false);
@@ -15,6 +17,19 @@ function Home() {
         console.log(err);
       });
   }, []);
+
+  const addProductToCart= (id)=> {
+    const token = localStorage.getItem("user")
+    const decodedToken = jwtDecode(token)
+    console.log("decodedtoken", decodedToken)
+    const userID = decodedToken.userId
+      axios.post(`http://localhost:5000/cart/add`, {
+        userId: userID,
+        productId: id
+      }).then(()=>console.log("item added to cart successfully")).catch((error)=>{
+        console.log("error adding the item", error)
+      })
+  }
 
   return (
     <div className="home">
@@ -37,7 +52,7 @@ function Home() {
                 >
                   Product Details
                 </button>
-                <button className=" add__item">add to Cart</button>
+                <button className=" add__item" onClick={()=>{addProductToCart(prod.id)}}>add to Cart</button>
               </div>
             </div>
           ))}

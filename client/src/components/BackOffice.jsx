@@ -54,7 +54,7 @@ function BackOffice() {
       .then((res) => {
         console.log("item deleted");
       })
-      .catch((err) => alert("Incorrect email or password", err));
+      .catch((err) => alert("Item was not deleted", err));
   };
 
   const handleUpload = () => {
