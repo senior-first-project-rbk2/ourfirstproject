@@ -34,8 +34,7 @@ function Register() {
 
     addUsers(username, email, password)
       .then((res) => {
-        const jsonData = JSON.stringify(res);
-        localStorage.setItem("user", jsonData);
+        localStorage.setItem("user", res.data.token);
         navigate("/");
       })
       .catch((err) => {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { login } from "../services/usersService";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios'
 
 function Login() {
   const navigate = useNavigate();
@@ -14,14 +14,17 @@ function Login() {
     setPassword(e.target.value);
   };
   const handleClick = () => {
-    login(email, password)
-      .then((res) => {
-        navigate("/");
-        const jsonData = JSON.stringify(res);
-        localStorage.setItem("user", jsonData);
-      })
-      .catch((err) => alert("Incorrect email or password", err));
-  };
+    
+    axios
+    .post("http://localhost:5000/users/login", { email, password })
+    .then((res) => {
+      localStorage.setItem("user",res.data.token)
+       navigate("/")
+    })
+    .catch((err) => {
+      console.error(err);
+      alert("Incorrect email or password", err)})
+    };
 
   return (
     <div className="login__container">
